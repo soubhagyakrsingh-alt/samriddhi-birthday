@@ -239,5 +239,33 @@
 
 
 </body>
+    <!-- Persistent music -->
 
+<audio id="birthdaySong" loop>
+    <source
+        src="music/birthday-song.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<!-- Floating music control -->
+
+<div class="floating-music">
+
+    <button
+        id="floatingMusicButton"
+        onclick="toggleFloatingMusic()"
+    >
+        ▶
+    </button>
+
+    <span id="floatingMusicStatus">
+        Continue the music 🎵
+    </span>
+
+</div>
+
+
+<script src="js/script.js"></script>
 </html>
