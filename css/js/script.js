@@ -1,45 +1,49 @@
-/* ========================================
-   BIRTHDAY WEBSITE — MUSIC SYSTEM
-======================================== */
+const song = document.getElementById("birthdaySong");
+const musicButton = document.getElementById("musicButton");
+const songStatus = document.getElementById("songStatus");
 
-const MUSIC_FILE = "music/birthday-song.mp3";
-
-let song = document.getElementById("birthdaySong");
-let musicButton = document.getElementById("musicButton");
-let songStatus = document.getElementById("songStatus");
+let musicPlaying = false;
 
 
 /* ========================================
-   PAGE 1 — START / PAUSE MUSIC
+   PLAY / PAUSE MUSIC
 ======================================== */
 
 function toggleMusic() {
 
-    if (!song) return;
+    if (!song) {
+        console.log("Audio element not found.");
+        return;
+    }
 
     if (song.paused) {
 
         song.play()
             .then(() => {
 
-                localStorage.setItem("musicStarted", "true");
+                musicPlaying = true;
+
+                localStorage.setItem(
+                    "musicStarted",
+                    "true"
+                );
 
                 musicButton.innerHTML =
                     "⏸ PAUSE THE SURPRISE";
 
-                if (songStatus) {
-                    songStatus.innerHTML =
-                        "♪ Now playing... just listen 👀";
-                }
+                songStatus.innerHTML =
+                    "♪ Now playing... just listen 👀";
 
             })
-            .catch(() => {
+            .catch((error) => {
 
-                if (songStatus) {
-                    songStatus.innerHTML =
-                        "Tap the button again to start the music 🎵";
-                }
+                console.error(
+                    "Music could not play:",
+                    error
+                );
 
+                songStatus.innerHTML =
+                    "Music couldn't start. Try pressing Play again 🎵";
             });
 
     } else {
@@ -48,19 +52,19 @@ function toggleMusic() {
 
         saveMusicPosition();
 
+        musicPlaying = false;
+
         musicButton.innerHTML =
             "▶ PLAY THE SONG";
 
-        if (songStatus) {
-            songStatus.innerHTML =
-                "Music paused...";
-        }
+        songStatus.innerHTML =
+            "Music paused...";
     }
 }
 
 
 /* ========================================
-   SAVE CURRENT SONG POSITION
+   SAVE MUSIC POSITION
 ======================================== */
 
 function saveMusicPosition() {
@@ -77,7 +81,7 @@ function saveMusicPosition() {
 }
 
 
-/* Save position periodically */
+/* Save position every second */
 
 setInterval(() => {
 
@@ -88,13 +92,12 @@ setInterval(() => {
 }, 1000);
 
 
-/* Save when leaving the page */
+/* Save before leaving page */
 
-window.addEventListener("beforeunload", () => {
-
-    saveMusicPosition();
-
-});
+window.addEventListener(
+    "beforeunload",
+    saveMusicPosition
+);
 
 
 /* ========================================
@@ -105,43 +108,41 @@ function goToSecret() {
 
     saveMusicPosition();
 
-    window.location.href = "secret.html";
+    window.location.href =
+        "secret.html";
 }
 
 
 /* ========================================
-   PAGE 2 / PAGE 3 MUSIC
+   PAGE 2 / PAGE 3
 ======================================== */
 
 function resumeMusic() {
 
     if (!song) return;
 
-    const savedTime =
-        parseFloat(
-            localStorage.getItem("musicTime")
-        );
+    const savedTime = parseFloat(
+        localStorage.getItem("musicTime")
+    );
 
     if (!isNaN(savedTime)) {
-
         song.currentTime = savedTime;
     }
 
     song.play()
         .then(() => {
 
-            localStorage.setItem(
-                "musicStarted",
-                "true"
-            );
-
             updateMusicControls();
 
         })
-        .catch(() => {
+        .catch((error) => {
+
+            console.log(
+                "Browser requires a user tap to resume music.",
+                error
+            );
 
             updateMusicControls();
-
         });
 }
 
@@ -181,7 +182,6 @@ function updateMusicControls() {
             "floatingMusicStatus"
         );
 
-
     if (!button) return;
 
 
@@ -190,7 +190,8 @@ function updateMusicControls() {
         button.innerHTML = "⏸";
 
         if (status) {
-            status.innerHTML = "Music playing";
+            status.innerHTML =
+                "Music playing";
         }
 
     } else {
@@ -198,7 +199,8 @@ function updateMusicControls() {
         button.innerHTML = "▶";
 
         if (status) {
-            status.innerHTML = "Play music";
+            status.innerHTML =
+                "Continue the music 🎵";
         }
     }
 }
