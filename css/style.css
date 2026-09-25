@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at top, #3a174f, transparent 45%),
+        linear-gradient(135deg, #120018, #21002d, #09000f);
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-x: hidden;
+}
+
+
+/* Main container */
+
+.birthday-container {
+    width: 92%;
+    max-width: 700px;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    position: relative;
+    z-index: 2;
+
+    animation: fadeIn 1.5s ease;
+}
+
+
+/* Small heading */
+
+.small-text {
+    font-size: 14px;
+    letter-spacing: 3px;
+
+    opacity: 0.75;
+
+    margin-bottom: 20px;
+}
+
+
+/* Main title */
+
+h1 {
+    font-size: clamp(42px, 9vw, 76px);
+
+    line-height: 1.05;
+
+    margin-bottom: 30px;
+
+    font-weight: 700;
+}
+
+h1 span {
+    display: block;
+
+    background: linear-gradient(
+        90deg,
+        #ff9de2,
+        #ffffff,
+        #d99cff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* Birthday paragraphs */
+
+.birthday-message {
+    max-width: 600px;
+
+    margin: 12px auto;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    color: rgba(255,255,255,0.82);
+}
+
+
+/* Music card */
+
+.music-card {
+
+    margin: 45px auto 30px;
+
+    padding: 32px 25px;
+
+    max-width: 500px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+    transition: 0.3s ease;
+}
+
+.music-card:hover {
+    transform: translateY(-5px);
+
+    background: rgba(255,255,255,0.11);
+}
+
+
+.music-icon {
+    font-size: 42px;
+
+    margin-bottom: 10px;
+
+    animation: pulse 2s infinite;
+}
+
+
+.music-card h2 {
+    font-size: 25px;
+
+    margin-bottom: 12px;
+}
+
+
+.music-card p {
+    color: rgba(255,255,255,0.75);
+
+    line-height: 1.6;
+}
+
+
+.music-hint {
+    margin-top: 8px;
+
+    font-style: italic;
+}
+
+
+/* Music button */
+
+#musicButton {
+
+    margin-top: 22px;
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background: white;
+
+    color: #26002f;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 8px 30px rgba(255,255,255,0.15);
+}
+
+#musicButton:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 10px 35px rgba(255,255,255,0.3);
+}
+
+
+.song-status {
+    margin-top: 15px;
+
+    font-size: 12px;
+
+    opacity: 0.55;
+}
+
+
+/* Surprise button */
+
+.surprise-button {
+
+    margin-top: 25px;
+
+    padding: 16px 32px;
+
+    border-radius: 50px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    background: rgba(255,255,255,0.08);
+
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.surprise-button:hover {
+
+    background: white;
+
+    color: #24002c;
+
+    transform: translateY(-3px);
+}
+
+
+/* Animations */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes pulse {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .birthday-container {
+        padding: 35px 10px;
+    }
+
+    .birthday-message {
+        font-size: 15px;
+    }
+
+    .music-card {
+        padding: 28px 18px;
+    }
+
+    .music-card h2 {
+        font-size: 22px;
+    }
+
+}
