@@ -646,3 +646,531 @@ h1 span {
     }
 
 }
+/* ========================================
+   PAGE 3 — MEMORIES
+======================================== */
+
+.memories-page {
+
+    min-height: 100vh;
+
+    display: block;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #451951,
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #100014,
+            #19001f,
+            #0b000f
+        );
+
+    overflow-x: hidden;
+}
+
+
+.memory-glow {
+
+    position: fixed;
+
+    width: 400px;
+    height: 400px;
+
+    border-radius: 50%;
+
+    background: rgba(255,157,226,0.09);
+
+    filter: blur(120px);
+
+    top: 20%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.memories-container {
+
+    width: 92%;
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* ========================================
+   INTRO
+======================================== */
+
+.memories-intro {
+
+    min-height: 85vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+.memory-label {
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.55;
+
+    margin-bottom: 25px;
+}
+
+
+.memories-intro h1 {
+
+    font-size: clamp(
+        45px,
+        9vw,
+        80px
+    );
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+}
+
+
+.memories-intro h1 span {
+
+    display: block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9de2,
+            white,
+            #d99cff
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.memories-intro > p {
+
+    max-width: 600px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.7);
+}
+
+
+.scroll-hint {
+
+    margin-top: 60px;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.45;
+
+    animation: scrollBounce 2s infinite;
+}
+
+
+@keyframes scrollBounce {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+
+/* ========================================
+   MEMORY ITEMS
+======================================== */
+
+.memory-item {
+
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 70px;
+
+    padding: 100px 0;
+}
+
+
+.memory-item.reverse {
+
+    flex-direction: row-reverse;
+}
+
+
+/* ========================================
+   PHOTO
+======================================== */
+
+.photo-frame {
+
+    width: min(
+        430px,
+        90vw
+    );
+
+    padding: 10px;
+
+    background: rgba(255,255,255,0.9);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.45);
+
+    transform: rotate(-2deg);
+
+    transition: 0.5s ease;
+}
+
+
+.memory-item.reverse .photo-frame {
+
+    transform: rotate(2deg);
+}
+
+
+.photo-frame:hover {
+
+    transform:
+        rotate(0deg)
+        scale(1.03);
+}
+
+
+.photo-frame img {
+
+    display: block;
+
+    width: 100%;
+
+    height: 520px;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   MEMORY MESSAGE
+======================================== */
+
+.memory-message {
+
+    max-width: 350px;
+}
+
+
+.memory-message span {
+
+    display: block;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.4;
+
+    margin-bottom: 20px;
+}
+
+
+.memory-message p {
+
+    font-size: 23px;
+
+    line-height: 1.65;
+
+    color: rgba(255,255,255,0.82);
+}
+
+
+/* ========================================
+   FINAL MESSAGE
+======================================== */
+
+.final-message {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 100px 20px;
+}
+
+
+.final-sparkle {
+
+    font-size: 25px;
+
+    letter-spacing: 12px;
+
+    opacity: 0.6;
+
+    margin-bottom: 25px;
+}
+
+
+.final-message h2 {
+
+    font-size: clamp(
+        40px,
+        8vw,
+        70px
+    );
+
+    line-height: 1.1;
+
+    margin-bottom: 35px;
+}
+
+
+.final-message h2 span {
+
+    display: block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9de2,
+            white,
+            #d99cff
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.final-message > p {
+
+    max-width: 650px;
+
+    font-size: 17px;
+
+    line-height: 1.9;
+
+    color: rgba(255,255,255,0.72);
+
+    margin-bottom: 20px;
+}
+
+
+.final-line {
+
+    margin-top: 30px;
+
+    max-width: 600px;
+
+    padding: 25px;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.7);
+}
+
+
+.final-line strong {
+
+    display: block;
+
+    color: white;
+
+    margin-top: 8px;
+}
+
+
+.big-heart {
+
+    font-size: 55px;
+
+    margin-top: 35px;
+
+    animation: heartBeat 2s infinite;
+}
+
+
+@keyframes heartBeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+.signature {
+
+    margin-top: 15px;
+
+    font-size: 14px !important;
+
+    opacity: 0.45;
+}
+
+
+/* ========================================
+   WEBSITE END
+======================================== */
+
+.website-ending {
+
+    text-align: center;
+
+    padding: 40px 20px 80px;
+
+    opacity: 0.5;
+}
+
+
+.website-ending p {
+
+    margin-bottom: 8px;
+}
+
+
+.website-ending span {
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+
+    .memories-intro {
+
+        min-height: 75vh;
+    }
+
+
+    .memories-intro > p {
+
+        font-size: 15px;
+    }
+
+
+    .memory-item,
+    .memory-item.reverse {
+
+        min-height: auto;
+
+        flex-direction: column;
+
+        gap: 35px;
+
+        padding: 90px 0;
+    }
+
+
+    .photo-frame {
+
+        width: 88vw;
+
+        max-width: 400px;
+    }
+
+
+    .photo-frame img {
+
+        height: 470px;
+    }
+
+
+    .memory-message {
+
+        text-align: center;
+
+        max-width: 90%;
+    }
+
+
+    .memory-message p {
+
+        font-size: 19px;
+
+        line-height: 1.7;
+    }
+
+
+    .final-message {
+
+        padding: 100px 10px;
+    }
+
+
+    .final-message > p {
+
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+
+}
