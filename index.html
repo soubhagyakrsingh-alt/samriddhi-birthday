@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday, Samriddhi 🎂</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Floating background particles -->
+    <div class="particles"></div>
+
+    <main class="birthday-container">
+
+        <div class="small-text">
+            ✨ A little surprise for you ✨
+        </div>
+
+        <h1>
+            Happy Birthday,
+            <span>Samriddhi</span> 🎂
+        </h1>
+
+        <p class="birthday-message">
+            Today is your day, so obviously I couldn't just send you
+            a boring little "Happy Birthday" message and disappear. 😂
+            You deserve something a little more special.
+        </p>
+
+        <p class="birthday-message">
+            I hope this year brings you countless reasons to smile,
+            amazing memories, good people around you, and everything
+            you've been wishing for.
+        </p>
+
+
+        <!-- MUSIC CARD -->
+
+        <section class="music-card">
+
+            <div class="music-icon">
+                🎧
+            </div>
+
+            <h2>
+                A little something for you...
+            </h2>
+
+            <p>
+                I picked a song specifically for today.
+                Don't ask me why yet. 👀
+            </p>
+
+            <p class="music-hint">
+                Just press play and listen...
+            </p>
+
+            <button id="musicButton" onclick="toggleMusic()">
+                ▶ PLAY THE SONG
+            </button>
+
+            <div class="song-status" id="songStatus">
+                Music is waiting for you...
+            </div>
+
+        </section>
+
+
+        <!-- Hidden audio -->
+        <audio id="birthdaySong" loop>
+            <source src="music/birthday-song.mp3" type="audio/mpeg">
+        </audio>
+
+
+        <!-- Continue button -->
+
+        <button
+            class="surprise-button"
+            onclick="goToSecret()"
+        >
+            🎁 OPEN YOUR SURPRISE
+        </button>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
