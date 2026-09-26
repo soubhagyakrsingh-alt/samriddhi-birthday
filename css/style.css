@@ -1174,15 +1174,3 @@ h1 span {
     }
 
 }
-/* =========================================
-   SINGLE-PAGE 3-SCREEN SYSTEM
-========================================= */
-
-.site-page {
-    display: none;
-    min-height: 100vh;
-}
-
-.site-page.page-active {
-    display: block;
-}
