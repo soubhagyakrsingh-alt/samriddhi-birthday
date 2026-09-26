@@ -1,63 +1,61 @@
-```javascript
 const song = document.getElementById("birthdaySong");
 
 
-/* ========================================
-   PAGE 1 MUSIC
-======================================== */
+/* =========================================
+   PAGE 1 — MUSIC
+========================================= */
 
 function toggleMusic() {
 
-    if (!song) return;
+    if (!song) {
+
+        console.error("Audio element not found!");
+
+        return;
+
+    }
 
 
-    const musicButton =
+    const button =
         document.getElementById("musicButton");
 
-
-    const songStatus =
+    const status =
         document.getElementById("songStatus");
 
 
     if (song.paused) {
 
         song.play()
-            .then(() => {
+            .then(function () {
 
-                localStorage.setItem(
-                    "musicStarted",
-                    "true"
-                );
+                if (button) {
 
-
-                if (musicButton) {
-
-                    musicButton.textContent =
+                    button.textContent =
                         "⏸ PAUSE THE SURPRISE";
 
                 }
 
 
-                if (songStatus) {
+                if (status) {
 
-                    songStatus.textContent =
+                    status.textContent =
                         "♪ Now playing... just listen 👀";
 
                 }
 
             })
-            .catch((error) => {
+            .catch(function (error) {
 
                 console.error(
-                    "Audio error:",
+                    "Music error:",
                     error
                 );
 
 
-                if (songStatus) {
+                if (status) {
 
-                    songStatus.textContent =
-                        "Music couldn't start — check the song file.";
+                    status.textContent =
+                        "Music couldn't start. Check the MP3.";
 
                 }
 
@@ -69,20 +67,18 @@ function toggleMusic() {
 
         song.pause();
 
-        saveMusicPosition();
 
+        if (button) {
 
-        if (musicButton) {
-
-            musicButton.textContent =
+            button.textContent =
                 "▶ PLAY THE SONG";
 
         }
 
 
-        if (songStatus) {
+        if (status) {
 
-            songStatus.textContent =
+            status.textContent =
                 "Music paused...";
 
         }
@@ -92,52 +88,11 @@ function toggleMusic() {
 }
 
 
-/* ========================================
-   SAVE SONG POSITION
-======================================== */
-
-function saveMusicPosition() {
-
-    if (!song) return;
-
-
-    localStorage.setItem(
-        "musicTime",
-        song.currentTime
-    );
-
-}
-
-
-/* Save position every second */
-
-setInterval(() => {
-
-    if (song && !song.paused) {
-
-        saveMusicPosition();
-
-    }
-
-}, 1000);
-
-
-/* Save before leaving */
-
-window.addEventListener(
-    "beforeunload",
-    saveMusicPosition
-);
-
-
-/* ========================================
+/* =========================================
    PAGE 1 → PAGE 2
-======================================== */
+========================================= */
 
 function goToSecret() {
-
-    saveMusicPosition();
-
 
     window.location.href =
         "secret.html";
@@ -145,53 +100,21 @@ function goToSecret() {
 }
 
 
-/* ========================================
-   RESUME MUSIC
-======================================== */
+/* =========================================
+   PAGE 2 → PAGE 3
+========================================= */
 
-function resumeMusic() {
+function goToMemories() {
 
-    if (!song) return;
-
-
-    const savedTime =
-        parseFloat(
-            localStorage.getItem("musicTime")
-        );
-
-
-    if (!isNaN(savedTime)) {
-
-        song.currentTime =
-            savedTime;
-
-    }
-
-
-    song.play()
-        .then(() => {
-
-            updateFloatingButton();
-
-        })
-        .catch((error) => {
-
-            console.log(
-                "Browser requires a tap to resume music.",
-                error
-            );
-
-
-            updateFloatingButton();
-
-        });
+    window.location.href =
+        "memories.html";
 
 }
 
 
-/* ========================================
+/* =========================================
    FLOATING MUSIC BUTTON
-======================================== */
+========================================= */
 
 function toggleFloatingMusic() {
 
@@ -200,15 +123,26 @@ function toggleFloatingMusic() {
 
     if (song.paused) {
 
-        resumeMusic();
+        song.play()
+            .then(function () {
+
+                updateFloatingButton();
+
+            })
+            .catch(function (error) {
+
+                console.error(
+                    "Music error:",
+                    error
+                );
+
+            });
 
     }
 
     else {
 
         song.pause();
-
-        saveMusicPosition();
 
         updateFloatingButton();
 
@@ -217,9 +151,9 @@ function toggleFloatingMusic() {
 }
 
 
-/* ========================================
-   FLOATING MUSIC UI
-======================================== */
+/* =========================================
+   FLOATING BUTTON UI
+========================================= */
 
 function updateFloatingButton() {
 
@@ -269,58 +203,3 @@ function updateFloatingButton() {
     }
 
 }
-
-
-/* ========================================
-   PAGE 2 → PAGE 3
-======================================== */
-
-function goToMemories() {
-
-    saveMusicPosition();
-
-
-    window.location.href =
-        "memories.html";
-
-}
-
-
-/* ========================================
-   PAGE 2 / PAGE 3
-   TRY TO RESUME AUTOMATICALLY
-======================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-
-        const musicStarted =
-            localStorage.getItem(
-                "musicStarted"
-            );
-
-
-        /*
-           Only attempt automatic resume
-           on Page 2 and Page 3.
-        */
-
-        if (
-            musicStarted === "true" &&
-            !document.getElementById(
-                "musicButton"
-            )
-        ) {
-
-            setTimeout(
-                resumeMusic,
-                500
-            );
-
-        }
-
-    }
-);
-```
