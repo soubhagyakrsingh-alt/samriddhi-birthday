@@ -1,94 +1,495 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Happy Birthday, Samriddhi 🎂</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- Floating background particles -->
-    <div class="particles"></div>
+    <!-- =========================================
+         SINGLE AUDIO ELEMENT
+         This stays alive through all 3 screens
+    ========================================== -->
 
-    <main class="birthday-container">
+    <audio
+        id="birthdaySong"
+        loop
+        preload="auto"
+    >
 
-        <div class="small-text">
-            ✨ A little surprise for you ✨
-        </div>
+        <source
+            src="music/birthday-song.mp3"
+            type="audio/mpeg"
+        >
 
-        <h1>
-            Happy Birthday,
-            <span>Samriddhi</span> 🎂
-        </h1>
-
-        <p class="birthday-message">
-            Today is your day, so obviously I couldn't just send you
-            a boring little "Happy Birthday" message and disappear. 😂
-            You deserve something a little more special.
-        </p>
-
-        <p class="birthday-message">
-            I hope this year brings you countless reasons to smile,
-            amazing memories, good people around you, and everything
-            you've been wishing for.
-        </p>
+    </audio>
 
 
-        <!-- MUSIC CARD -->
+    <!-- =========================================
+         PAGE 1
+    ========================================== -->
 
-        <section class="music-card">
+    <section
+        id="page1"
+        class="site-page page-active"
+    >
 
-            <div class="music-icon">
-                🎧
+        <div class="particles"></div>
+
+
+        <main class="birthday-container">
+
+
+            <div class="small-text">
+                ✨ A little surprise for you ✨
             </div>
 
-            <h2>
-                A little something for you...
-            </h2>
 
-            <p>
-                I picked a song specifically for today.
-                Don't ask me why yet. 👀
+            <h1>
+
+                Happy Birthday,
+
+                <span>
+                    Samriddhi
+                </span>
+
+                🎂
+
+            </h1>
+
+
+            <p class="birthday-message">
+
+                Today is your day, so obviously I couldn't
+                just send you a boring little "Happy Birthday"
+                message and disappear. 😂
+
+                You deserve something a little more special.
+
             </p>
 
-            <p class="music-hint">
-                Just press play and listen...
+
+            <p class="birthday-message">
+
+                I hope this year brings you countless reasons
+                to smile, amazing memories, good people around
+                you, and everything you've been wishing for.
+
             </p>
 
-            <button id="musicButton" onclick="toggleMusic()">
-                ▶ PLAY THE SONG
+
+            <!-- MUSIC CARD -->
+
+            <section class="music-card">
+
+
+                <div class="music-icon">
+                    🎧
+                </div>
+
+
+                <h2>
+                    A little something for you...
+                </h2>
+
+
+                <p>
+
+                    I picked a song specifically for today.
+                    Don't ask me why yet. 👀
+
+                </p>
+
+
+                <p class="music-hint">
+
+                    Just press play and listen...
+
+                </p>
+
+
+                <button
+                    id="musicButton"
+                    onclick="toggleMusic()"
+                >
+
+                    ▶ PLAY THE SONG
+
+                </button>
+
+
+                <div
+                    class="song-status"
+                    id="songStatus"
+                >
+
+                    Music is waiting for you...
+
+                </div>
+
+
+            </section>
+
+
+            <!-- PAGE 1 → PAGE 2 -->
+
+            <button
+                class="surprise-button"
+                onclick="showPage(2)"
+            >
+
+                🎁 OPEN YOUR SURPRISE
+
             </button>
 
-            <div class="song-status" id="songStatus">
-                Music is waiting for you...
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================================
+         PAGE 2
+         SECRET MESSAGE
+    ========================================== -->
+
+    <section
+        id="page2"
+        class="site-page"
+    >
+
+        <div class="secret-glow"></div>
+
+
+        <main class="secret-container">
+
+
+            <div class="secret-label">
+                🤫 ONE LITTLE SECRET
             </div>
 
-        </section>
+
+            <h1>
+                Okay Samriddhi...
+            </h1>
 
 
-        <!-- Hidden audio -->
-        <audio id="birthdaySong" loop>
-            <source src="music/birthday-song.mp3" type="audio/mpeg">
-        </audio>
+            <p class="secret-intro">
+
+                There's something I've never really told you.
+
+            </p>
 
 
-        <!-- Continue button -->
-
-        <button
-            class="surprise-button"
-            onclick="goToSecret()"
-        >
-            🎁 OPEN YOUR SURPRISE
-        </button>
-
-    </main>
+            <div class="secret-card">
 
 
-    <script src="js/script.js"></script>
+                <p>
 
-</body>
-</html>
+                    Before you read this, don't suddenly start
+                    overthinking everything. 😂
+
+                </p>
+
+
+                <p>
+
+                    And please don't make this more awkward
+                    than it needs to be.
+
+                </p>
+
+
+                <p>
+
+                    I've actually wanted to say this for quite a while,
+                    but every time I thought about telling you,
+                    I ended up deciding that maybe it was better
+                    left unsaid.
+
+                </p>
+
+
+                <div class="big-reveal">
+
+                    The truth is...
+
+                    <strong>
+                        I kinda like you.
+                    </strong>
+
+                </div>
+
+
+                <p>
+
+                    Yeah. There, I finally said it. 😭
+
+                </p>
+
+
+                <p>
+
+                    But before you start making a whole movie out of
+                    that one sentence, let me explain.
+
+                </p>
+
+
+                <p>
+
+                    It's not some huge dramatic confession,
+                    and I'm not expecting anything from you.
+                    I just wanted to be honest about something
+                    I've kept to myself because, honestly,
+
+                    <strong>
+                        our friendship means way too much to me.
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    You're one of those people who somehow became
+                    a really important part of my life without either
+                    of us planning it.
+
+                </p>
+
+
+                <p>
+
+                    The random conversations, stupid jokes,
+                    annoying each other for absolutely no reason,
+                    sharing things we probably shouldn't, and all
+                    those little moments that don't seem like much
+                    at the time...
+
+                </p>
+
+
+                <p>
+
+                    Somehow, they became some of my favourite things.
+
+                </p>
+
+
+                <p>
+
+                    And that's exactly why I've never wanted to say this.
+
+                </p>
+
+
+                <p>
+
+                    Because there's always that tiny fear that once
+                    you tell someone how you feel, things might change.
+
+                </p>
+
+
+                <div class="highlight-lines">
+
+
+                    <span>
+                        Maybe conversations become awkward.
+                    </span>
+
+
+                    <span>
+                        Maybe jokes don't feel the same anymore.
+                    </span>
+
+
+                    <span>
+
+                        Maybe you start thinking differently about
+                        every little thing.
+
+                    </span>
+
+
+                </div>
+
+
+                <p class="center-line">
+                    And honestly?
+                </p>
+
+
+                <p class="friendship-line">
+
+                    <strong>
+                        I don't want that.
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    I'd rather have you as my bestie and keep all
+                    the madness we already have than say something
+                    and accidentally ruin something that's genuinely
+                    special to me.
+
+                </p>
+
+
+                <p>
+
+                    So I'm not telling you this because I want you
+                    to give me an answer.
+
+                </p>
+
+
+                <p>
+                    You don't have to say anything.
+                </p>
+
+
+                <p>
+                    You don't have to feel the same.
+                </p>
+
+
+                <p>
+                    You don't have to make anything weird.
+                </p>
+
+
+                <p>
+
+                    Just know that somewhere along the way,
+                    you became someone I started liking a little
+                    more than I probably should have.
+
+                </p>
+
+
+                <p>
+
+                    And despite that,
+
+                    <strong>
+
+                        I'd still choose our friendship over
+                        making things complicated.
+
+                    </strong>
+
+                </p>
+
+
+                <div class="secret-ending">
+
+
+                    <p>
+                        So yeah...
+                    </p>
+
+
+                    <h2>
+                        That's my little secret.
+                    </h2>
+
+
+                    <p>
+                        Now you know. 🤦‍♂️😂
+                    </p>
+
+
+                    <p>
+
+                        And please, for the love of everything,
+
+                        <strong>
+
+                            don't use this information against me
+                            the next time we argue.
+
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+
+                        Because I already know you'll bring it up forever. 😭
+
+                    </p>
+
+
+                </div>
+
+
+                <div class="birthday-note">
+
+
+                    <h2>
+                        Happy Birthday, Samriddhi ❤️
+                    </h2>
+
+
+                    <p>
+
+                        I hope this year gives you everything you're
+                        hoping for, a lot of reasons to smile, and
+                        plenty of ridiculous memories for us to look
+                        back on someday.
+
+                    </p>
+
+
+                    <p>
+                        And whatever happens after this page...
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+
+                            I still want you to know that you're
+                            my bestie first.
+
+                        </strong>
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PAGE 2 → PAGE 3 -->
+
+            <button
+                class="memories-button"
+                onclick="showPage(3)"
+```
