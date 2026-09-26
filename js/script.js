@@ -1,77 +1,109 @@
+```javascript
 /* =========================================
    SAMRIDDHI BIRTHDAY WEBSITE
-   CONTINUOUS MUSIC SYSTEM
+   SINGLE-PAGE / CONTINUOUS MUSIC SYSTEM
 ========================================= */
-
-const song = document.getElementById("birthdaySong");
 
 
 /* =========================================
-   SAVE MUSIC POSITION
+   ELEMENTS
 ========================================= */
 
-function saveMusicPosition() {
+const song =
+    document.getElementById("birthdaySong");
 
-    if (!song) return;
+const musicButton =
+    document.getElementById("musicButton");
 
-    localStorage.setItem(
-        "musicTime",
-        song.currentTime
+const songStatus =
+    document.getElementById("songStatus");
+
+const floatingMusicButton =
+    document.getElementById(
+        "floatingMusicButton"
     );
+
+const floatingMusicStatus =
+    document.getElementById(
+        "floatingMusicStatus"
+    );
+
+
+/* =========================================
+   PAGE ELEMENTS
+========================================= */
+
+const page1 =
+    document.getElementById("page1");
+
+const page2 =
+    document.getElementById("page2");
+
+const page3 =
+    document.getElementById("page3");
+
+
+/* =========================================
+   START MUSIC
+========================================= */
+
+function startMusic() {
+
+    if (!song) {
+
+        console.error(
+            "birthdaySong audio element not found."
+        );
+
+        return;
+
+    }
+
+
+    song.play()
+        .then(() => {
+
+            updateMusicUI();
+
+        })
+        .catch((error) => {
+
+            console.error(
+                "Music could not start:",
+                error
+            );
+
+
+            if (songStatus) {
+
+                songStatus.textContent =
+                    "Tap play again to start the music.";
+
+            }
+
+        });
 
 }
 
 
 /* =========================================
-   PAGE 1 — PLAY / PAUSE
+   PLAY / PAUSE MUSIC
 ========================================= */
 
 function toggleMusic() {
 
     if (!song) return;
 
-    const musicButton =
-        document.getElementById("musicButton");
-
-    const songStatus =
-        document.getElementById("songStatus");
-
 
     if (song.paused) {
 
-        song.play()
-            .then(() => {
-
-                localStorage.setItem(
-                    "musicStarted",
-                    "true"
-                );
-
-                updatePage1Button();
-
-            })
-            .catch((error) => {
-
-                console.error(
-                    "Music error:",
-                    error
-                );
-
-                if (songStatus) {
-
-                    songStatus.textContent =
-                        "Tap play again to start the music.";
-                }
-
-            });
+        startMusic();
 
     } else {
 
         song.pause();
 
-        saveMusicPosition();
-
-        updatePage1Button();
+        updateMusicUI();
 
     }
 
@@ -79,44 +111,59 @@ function toggleMusic() {
 
 
 /* =========================================
-   PAGE 1 BUTTON
+   UPDATE ALL MUSIC BUTTONS
 ========================================= */
 
-function updatePage1Button() {
+function updateMusicUI() {
 
-    const musicButton =
-        document.getElementById("musicButton");
-
-    const songStatus =
-        document.getElementById("songStatus");
+    const playing =
+        song && !song.paused;
 
 
-    if (!musicButton) return;
+    /* Page 1 button */
 
-
-    if (song && !song.paused) {
+    if (musicButton) {
 
         musicButton.textContent =
-            "⏸ PAUSE THE SURPRISE";
+            playing
+                ? "⏸ PAUSE THE SURPRISE"
+                : "▶ PLAY THE SONG";
+
+    }
 
 
-        if (songStatus) {
+    /* Page 1 status */
 
-            songStatus.textContent =
-                "♪ Now playing... just listen 👀";
-        }
+    if (songStatus) {
 
-    } else {
+        songStatus.textContent =
+            playing
+                ? "♪ Now playing... just listen 👀"
+                : "Music is waiting for you...";
 
-        musicButton.textContent =
-            "▶ PLAY THE SONG";
+    }
 
 
-        if (songStatus) {
+    /* Floating button */
 
-            songStatus.textContent =
-                "Music paused...";
-        }
+    if (floatingMusicButton) {
+
+        floatingMusicButton.textContent =
+            playing
+                ? "⏸"
+                : "▶";
+
+    }
+
+
+    /* Floating status */
+
+    if (floatingMusicStatus) {
+
+        floatingMusicStatus.textContent =
+            playing
+                ? "Music playing 🎵"
+                : "Play the music 🎵";
 
     }
 
@@ -124,123 +171,66 @@ function updatePage1Button() {
 
 
 /* =========================================
-   SAVE POSITION EVERY SECOND
+   CHANGE BETWEEN THE 3 SCREENS
 ========================================= */
 
-setInterval(() => {
+function showPage(pageNumber) {
 
-    if (song && !song.paused) {
+    /* Hide everything */
 
-        saveMusicPosition();
+    page1.classList.remove(
+        "page-active"
+    );
 
-    }
+    page2.classList.remove(
+        "page-active"
+    );
 
-}, 500);
-
-
-/* =========================================
-   SAVE BEFORE LEAVING
-========================================= */
-
-window.addEventListener(
-    "beforeunload",
-    saveMusicPosition
-);
+    page3.classList.remove(
+        "page-active"
+    );
 
 
-/* =========================================
-   PAGE 1 → PAGE 2
-========================================= */
+    /* Show requested page */
 
-function goToSecret() {
+    if (pageNumber === 1) {
 
-    saveMusicPosition();
-
-    window.location.href =
-        "secret.html";
-
-}
-
-
-/* =========================================
-   RESUME MUSIC
-========================================= */
-
-function resumeMusic() {
-
-    if (!song) return;
-
-
-    const savedTime =
-        parseFloat(
-            localStorage.getItem("musicTime")
+        page1.classList.add(
+            "page-active"
         );
 
+    }
 
-    if (!isNaN(savedTime)) {
 
-        song.addEventListener(
-            "loadedmetadata",
-            function () {
+    if (pageNumber === 2) {
 
-                if (
-                    savedTime >= 0 &&
-                    savedTime < song.duration
-                ) {
-
-                    song.currentTime =
-                        savedTime;
-
-                }
-
-                attemptMusicPlayback();
-
-            },
-            { once: true }
+        page2.classList.add(
+            "page-active"
         );
-
-    } else {
-
-        attemptMusicPlayback();
 
     }
 
-}
+
+    if (pageNumber === 3) {
+
+        page3.classList.add(
+            "page-active"
+        );
+
+    }
 
 
-/* =========================================
-   TRY AUTOMATIC PLAY
-========================================= */
+    /* Scroll to top */
 
-function attemptMusicPlayback() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-    if (!song) return;
 
+    /* Keep music playing */
 
-    song.play()
-        .then(() => {
-
-            localStorage.setItem(
-                "musicStarted",
-                "true"
-            );
-
-            updateFloatingMusic();
-
-        })
-        .catch(() => {
-
-            /*
-              Browser blocked automatic
-              playback.
-
-              The floating button remains
-              available so she can tap it once.
-            */
-
-            updateFloatingMusic();
-
-        });
+    updateMusicUI();
 
 }
 
@@ -251,164 +241,68 @@ function attemptMusicPlayback() {
 
 function toggleFloatingMusic() {
 
-    if (!song) return;
-
-
-    if (song.paused) {
-
-        const savedTime =
-            parseFloat(
-                localStorage.getItem("musicTime")
-            );
-
-
-        if (
-            !isNaN(savedTime) &&
-            savedTime < song.duration
-        ) {
-
-            song.currentTime =
-                savedTime;
-
-        }
-
-
-        song.play()
-            .then(() => {
-
-                localStorage.setItem(
-                    "musicStarted",
-                    "true"
-                );
-
-                updateFloatingMusic();
-
-            })
-            .catch((error) => {
-
-                console.error(
-                    "Music could not start:",
-                    error
-                );
-
-            });
-
-    } else {
-
-        song.pause();
-
-        saveMusicPosition();
-
-        updateFloatingMusic();
-
-    }
+    toggleMusic();
 
 }
 
 
 /* =========================================
-   FLOATING BUTTON UPDATE
+   KEEP MUSIC PLAYING
 ========================================= */
 
-function updateFloatingMusic() {
+if (song) {
 
-    const button =
-        document.getElementById(
-            "floatingMusicButton"
-        );
-
-
-    const status =
-        document.getElementById(
-            "floatingMusicStatus"
-        );
+    song.addEventListener(
+        "play",
+        updateMusicUI
+    );
 
 
-    if (!button) return;
+    song.addEventListener(
+        "pause",
+        updateMusicUI
+    );
 
 
-    if (song && !song.paused) {
+    song.addEventListener(
+        "ended",
+        updateMusicUI
+    );
 
-        button.textContent =
-            "⏸";
-
-
-        if (status) {
-
-            status.textContent =
-                "Music playing";
-
-        }
-
-    } else {
-
-        button.textContent =
-            "▶";
+}
 
 
-        if (status) {
+/* =========================================
+   KEYBOARD NAVIGATION
+   Optional
+========================================= */
 
-            status.textContent =
-                "Continue the music 🎵";
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            showPage(1);
 
         }
 
     }
-
-}
-
-
-/* =========================================
-   PAGE 2 → PAGE 3
-========================================= */
-
-function goToMemories() {
-
-    saveMusicPosition();
-
-    window.location.href =
-        "memories.html";
-
-}
+);
 
 
 /* =========================================
-   AUTOMATIC RESUME ON PAGE 2 / 3
+   INITIAL STATE
 ========================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-        /*
-          Only attempt automatic resume if
-          music was started previously.
-        */
+        showPage(1);
 
-        const musicStarted =
-            localStorage.getItem(
-                "musicStarted"
-            );
-
-
-        if (
-            musicStarted === "true" &&
-            !document.getElementById(
-                "musicButton"
-            )
-        ) {
-
-            /*
-              Small delay gives the browser
-              time to load the audio metadata.
-            */
-
-            setTimeout(
-                resumeMusic,
-                300
-            );
-
-        }
+        updateMusicUI();
 
     }
 );
+```
